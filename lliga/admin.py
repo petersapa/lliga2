@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import *
- 
+
 admin.site.register(Lliga)
 admin.site.register(Equip)
 admin.site.register(Jugador)
@@ -10,6 +10,7 @@ class EventInline(admin.TabularInline):
     model = Event
     fields = ["temps","tipus","jugador","equip"]
     ordering = ("temps",)
+
 class PartitAdmin(admin.ModelAdmin):
     # podem fer cerques en els models relacionats
     # (noms dels equips o títol de la lliga)
@@ -28,5 +29,5 @@ class PartitAdmin(admin.ModelAdmin):
                         tipus="GOL",
                         equip=obj.visitant).count()
         return "{} - {}".format(gols_local,gols_visit)
- 
+
 admin.site.register(Partit,PartitAdmin)
