@@ -19,7 +19,7 @@ from django.urls import path
 from django.http import HttpResponse
 
 def vista_lliga(request):
-    return HttpResponse("¡Bienvenido a la página de Lliga!")
+    return HttpResponse("Benvingut a la pàgina de la lliga!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
