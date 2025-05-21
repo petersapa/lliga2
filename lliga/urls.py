@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+
+def vista_lliga(request):
+    return HttpResponse("¡Bienvenido a la página de Lliga!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('lliga/', vista_lliga),
 ]
