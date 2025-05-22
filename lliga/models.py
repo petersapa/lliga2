@@ -14,7 +14,7 @@ class Lliga(models.Model):
 class Equip(models.Model):
     nom = models.CharField(max_length=100)
     ciutat = models.CharField(max_length=100)
-    fundacio = models.IntegerField()
+    fundacio = models.IntegerField(null=True)
     escut = models.ImageField(upload_to='escuts/', null=True, blank=True)
     lliga = models.ManyToManyField(Lliga, related_name='equips')
     

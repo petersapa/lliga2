@@ -6,8 +6,8 @@ from random import randint
  
 from lliga.models import *
  
-faker = Faker(["es_CA","es_ES"])
- 
+fake = Faker(["es_CA","es_ES"])
+
 class Command(BaseCommand):
     help = 'Crea una lliga amb equips i jugadors'
  
@@ -28,21 +28,20 @@ class Command(BaseCommand):
         print("Creem equips")
         prefixos = ["RCD", "Athletic", "", "Deportivo", "Unión Deportiva"]
         for i in range(20):
-            ciutat = faker.city()
+            ciutat = fake.city()
             prefix = prefixos[randint(0,len(prefixos)-1)]
             if prefix:
                 prefix += " "
             nom =  prefix + ciutat
-            equip = Equip(ciutat=ciutat,nom=nom,lliga=lliga)
-            #print(equip)
+            equip = Equip(ciutat=ciutat,nom=nom)
             equip.save()
-            lliga.equips.add(equip)
+            equip.lliga.add(lliga)
  
             print("Creem jugadors de l'equip "+nom)
             for j in range(25):
-                nom = faker.name()
+                nom = fake.name()
                 posicio = "jugador"
-                data_naixement = timezone.now();
+                data_naixement = timezone.now()
                 jugador = Jugador(nom=nom,posicio=posicio,dorsal=j,
                     data_naixement=data_naixement,equip=equip)
                 #print(jugador)
@@ -52,8 +51,25 @@ class Command(BaseCommand):
         for local in lliga.equips.all():
             for visitant in lliga.equips.all():
                 if local!=visitant:
-                    partit = Partit(local=local,visitant=visitant)
+                    partit = Partit(local=local,visitant=visitant,
+                                    data=timezone.now())
                     partit.local = local
                     partit.visitant = visitant
                     partit.lliga = lliga
                     partit.save()
+
+                    #crear gols locals
+                    for i in range(randint(0,6)):
+                        gol = Event(partit=partit, temps=timezone.now(), 
+                                    tipus="GOL", equip=local,
+                                    jugador=local.jugadors.all()[randint(0,24)])
+                        gol.save()
+                        partit.events.add(gol)
+
+                    #crear gols visitants
+                    for i in range(randint(0,6)):
+                        gol = Event(partit=partit, temps=timezone.now(), 
+                                    tipus="GOL", equip=visitant,
+                                    jugador=visitant.jugadors.all()[randint(0,24)])
+                        gol.save()
+                        partit.events.add(gol)
