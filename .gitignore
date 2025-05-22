@@ -4,6 +4,7 @@
 /venv/
 /static/*
 /media/*
+/escuts/
 .env
 db.sqlite3
 .coverage
