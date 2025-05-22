@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 
+from lliga import views
+
 def vista_lliga(request):
     return HttpResponse("Benvingut a la pàgina de la lliga!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('lliga/', vista_lliga),
+    path('classificacio', views.classificacio),
 ]

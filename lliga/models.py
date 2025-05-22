@@ -51,6 +51,13 @@ class Partit(models.Model):
     
     #def __str__(self):
     #    return f"{self.local} {self.gols_local} - {self.gols_visitant} {self.visitant} ({self.data})"
+    def gols_local(self):
+        gols = self.events.filter(tipus="GOL", equip=self.local).count()
+        return gols
+
+    def gols_visitant(self):
+        gols = self.events.filter(tipus="GOL", equip=self.visitant).count()
+        return gols
 
 class Event(models.Model):
     TIPUS_EVENT = [
