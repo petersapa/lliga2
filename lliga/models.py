@@ -49,8 +49,8 @@ class Partit(models.Model):
         ordering = ['data']
         verbose_name_plural = 'partits'
     
-    def __str__(self):
-        return f"{self.local} {self.gols_local} - {self.gols_visitant} {self.visitant} ({self.data})"
+    #def __str__(self):
+    #    return f"{self.local} {self.gols_local} - {self.gols_visitant} {self.visitant} ({self.data})"
 
 class Event(models.Model):
     TIPUS_EVENT = [
