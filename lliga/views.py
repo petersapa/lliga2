@@ -3,9 +3,14 @@ from django.http import HttpResponse
 
 from .models import *
 
-def classificacio(request):
+def classificacio_menu(request):
+    queryset = Lliga.objects.all()
+    return render(request, "classificacio_menu.html", {"lligues":queryset})
+
+def classificacio(request, lliga_id):
     #lliga = Lliga.objects.first()
-    lliga = Lliga.objects.last()
+    #lliga = Lliga.objects.last()
+    lliga = Lliga.objects.get(pk=lliga_id)
     equips = lliga.equips.all()
     classi = []
  
