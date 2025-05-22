@@ -33,5 +33,6 @@ def classificacio(request, lliga_id):
     classi.sort(reverse=True)
     return render(request,"classificacio.html",
                 {
+                    "lliga":lliga.nom,
                     "classificacio":classi,
                 })
