@@ -5,8 +5,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class Lliga(models.Model):
     nom = models.CharField(max_length=100)
     temporada = models.CharField(max_length=20)
-    data_inici = models.DateField()
-    data_fi = models.DateField()
+    data_inici = models.DateField(null=True)
+    data_fi = models.DateField(null=True)
     
     def __str__(self):
         return f"{self.nom} {self.temporada}"
