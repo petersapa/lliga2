@@ -1,5 +1,18 @@
-<ol>
-{% for equip in classificacio %}
-	<li>{{equip.1}} ({{equip.0}} punts)</li>
-{% endfor %}
-</ol>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Equip</th>
+            <th>Punts</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equip in classificacio %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ equip.1 }}</td>
+            <td>{{ equip.0 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

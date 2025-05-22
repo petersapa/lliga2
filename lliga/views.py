@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from .models import *
 
 def classificacio(request):
-    lliga = Lliga.objects.first()
+    #lliga = Lliga.objects.first()
+    lliga = Lliga.objects.last()
     equips = lliga.equips.all()
     classi = []
  
