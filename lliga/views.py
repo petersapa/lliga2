@@ -67,6 +67,10 @@ def crea_equip(request):
     if request.method == "POST":
         form = EquipForm(request.POST)
         if form.is_valid():
+            # TODO: verificar que el nom de l'equip no existeixi
+            equips = Equip.objects.filter(nom=form.cleaned_data.get("nom"))
+            if (equips.count() > 0):
+                return HttpResponse("ERROR: nom repetit");
             form.save()
 
     return render(request,"crea_equip.html",
