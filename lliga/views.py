@@ -1,11 +1,29 @@
-from django.shortcuts import render 
+from django.shortcuts import render, redirect 
 from django.http import HttpResponse
+from django import forms
+
 
 from .models import *
 
+class MenuForm(forms.Form):
+    lliga = forms.ModelChoiceField(queryset=Lliga.objects.all())
+
 def classificacio_menu(request):
     queryset = Lliga.objects.all()
-    return render(request, "classificacio_menu.html", {"lligues":queryset})
+    #form = MenuForm()
+    #return render(request, "classificacio_menu.html", {"lligues":queryset, "form": form})
+    if request.method == "POST":
+        form = MenuForm(request.POST)
+        if form.is_valid():
+            lliga = form.cleaned_data.get("lliga")
+            # cridem a /classificacio/<lliga_id>
+            return redirect('classificacio',lliga.id)
+
+    form = MenuForm()
+    return render(request, "classificacio_menu.html",{
+                    "lligues": queryset,
+                    "form": form,
+            })
 
 def classificacio(request, lliga_id):
     #lliga = Lliga.objects.first()
@@ -36,3 +54,4 @@ def classificacio(request, lliga_id):
                     "lliga":lliga.nom,
                     "classificacio":classi,
                 })
+ 

@@ -5,3 +5,12 @@ Tria la lliga:
      {% endfor %}
 
 </ul>
+
+<h1>Menu Lligues</h1>
+ 
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+ 
+	<input type="submit" name="submit">
+</form>
