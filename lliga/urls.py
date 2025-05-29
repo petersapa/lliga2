@@ -28,4 +28,5 @@ urlpatterns = [
     path('lliga/', vista_lliga),
     path('classificacio/', views.classificacio_menu),
     path('classificacio/<int:lliga_id>/', views.classificacio, name="classificacio"),
+    path('crea_equip', views.crea_equip)
 ]

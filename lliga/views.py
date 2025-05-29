@@ -54,4 +54,22 @@ def classificacio(request, lliga_id):
                     "lliga":lliga.nom,
                     "classificacio":classi,
                 })
- 
+
+
+
+class EquipForm(forms.ModelForm):
+    class Meta:
+        model = Equip
+        exclude = ()
+
+def crea_equip(request):
+    form = EquipForm()
+    if request.method == "POST":
+        form = EquipForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    return render(request,"crea_equip.html",
+                {
+                    "form":form
+                })
